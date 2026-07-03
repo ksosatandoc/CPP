@@ -53,6 +53,32 @@
 .oh-task-meta{font-size:10px;color:var(--t2);margin-top:2px;display:flex;gap:8px;flex-wrap:wrap}
 .oh-task-due{font-size:10px;font-weight:500;white-space:nowrap;flex-shrink:0;min-width:50px;text-align:right}
 .oh-next-due{background:var(--wbg);border:.5px solid var(--wb);border-radius:6px;padding:6px 10px;font-size:11px;color:var(--wt);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+
+.tw-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:400;align-items:center;justify-content:center;padding:16px}
+.tw-modal-bg.on{display:flex}
+.tw-modal{background:var(--bg);border:.5px solid var(--b2);border-radius:12px;width:100%;max-width:560px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.tw-modal-hdr{padding:14px 16px 10px;border-bottom:.5px solid var(--b1);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-shrink:0}
+.tw-modal-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
+.tw-modal-title{font-size:14px;font-weight:500;color:var(--t1)}
+.tw-modal-sub{font-size:11px;color:var(--t2);margin-top:2px}
+.tw-modal-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--t2);line-height:1;padding:0 2px;flex-shrink:0}
+.tw-modal-summary{padding:10px 16px;border-bottom:.5px solid var(--b1);display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0}
+.tw-modal-stat{padding:5px 10px;border-radius:6px;text-align:center;min-width:80px}
+.tw-modal-stat-n{font-size:18px;font-weight:500;line-height:1}
+.tw-modal-stat-l{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--t2);margin-top:1px}
+.tw-modal-tasks{flex:1;overflow-y:auto;padding:8px 16px 12px}
+.tw-modal-tasks-hdr{font-size:10px;font-weight:500;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;margin-top:4px;display:flex;align-items:center;justify-content:space-between}
+.tw-modal-filter{display:flex;gap:3px;margin-bottom:8px}
+.tw-modal-fb{padding:2px 8px;font-size:10px;font-weight:500;border:.5px solid var(--b1);border-radius:5px;cursor:pointer;background:var(--bg);color:var(--t2);user-select:none}
+.tw-modal-fb.on{background:#236CFF;color:#fff;border-color:#236CFF}
+.tw-task-row{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:.5px solid var(--b1)}
+.tw-task-row:last-child{border-bottom:none}
+.tw-task-st{font-size:9px;font-weight:500;padding:2px 6px;border-radius:3px;white-space:nowrap;flex-shrink:0;margin-top:1px}
+.tw-task-main{flex:1;min-width:0}
+.tw-task-name{font-size:11px;color:var(--t1);line-height:1.4}
+.tw-task-meta{font-size:10px;color:var(--t2);margin-top:2px;display:flex;gap:8px;flex-wrap:wrap}
+.tw-task-due{font-size:10px;font-weight:500;white-space:nowrap;flex-shrink:0;min-width:50px;text-align:right}
+.tw-empty{padding:20px 0;font-size:11px;color:var(--t2);text-align:center}
 </style>
 </head>
 <body>
@@ -439,6 +465,14 @@ function renderTeamWorkload(){
     if(s.pastdue)nums+='<span class="tw-num" style="background:#fef2f2;color:#dc2626">'+s.pastdue+' past due</span>';
     if(s.inprog) nums+='<span class="tw-num" style="background:#fffbeb;color:#d97706">'+s.inprog+' in prog</span>';
     if(s.open)   nums+='<span class="tw-num" style="background:var(--bg2);color:var(--t2)">'+s.open+' open</span>';
+    card.style.cursor='pointer';
+    card.style.transition='box-shadow .12s';
+    card.addEventListener('mouseenter',function(){card.style.boxShadow='0 2px 8px rgba(0,0,0,.1)';});
+    card.addEventListener('mouseleave',function(){card.style.boxShadow='';});
+    card.addEventListener('click',(function(n,c){return function(){
+      if(ACTIONS.length){openTeamModal(n,c);}
+      else{alert('Live data not yet loaded. Click Refresh to load.');}
+    };})(name,color));
     card.innerHTML=
       '<div class="tw-av" style="background:'+color+'22;color:'+color+'">'+initials(name)+'</div>'+
       '<div class="tw-name">'+name+'</div>'+
@@ -700,8 +734,18 @@ function cpHideTip(){CP_TIP.classList.remove('on');}
 document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('rfbtn').addEventListener('click',function(){loadData();});
   document.getElementById('oh-modal-close').addEventListener('click',closeOutputModal);
+  document.getElementById('tw-modal-close').addEventListener('click',closeTeamModal);
+  document.getElementById('tw-modal-bg').addEventListener('click',function(e){if(e.target===this)closeTeamModal();});
+  document.getElementById('tw-modal-filter').addEventListener('click',function(e){
+    var btn=e.target.closest('[data-twf]');if(!btn)return;
+    TW_MODAL_FILTER=btn.dataset.twf;
+    document.querySelectorAll('[data-twf]').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
+    var items=ACTIONS.filter(function(a){return normO(a.owner||'')===TW_MODAL_OWNER;});
+    renderTeamModalList(items);
+  });
   document.getElementById('oh-modal-bg').addEventListener('click',function(e){if(e.target===this)closeOutputModal();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOutputModal();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeOutputModal();closeTeamModal();}});
   document.getElementById('dc-close').addEventListener('click',clearSel);
   document.getElementById('view-grp').addEventListener('click',function(e){var btn=e.target.closest('[data-view]');if(!btn)return;viewMode=btn.dataset.view;document.querySelectorAll('[data-view]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');selId=null;document.getElementById('detail-card').classList.remove('show');render();});
   document.getElementById('group-grp').addEventListener('click',function(e){var btn=e.target.closest('[data-group]');if(!btn)return;groupBy=btn.dataset.group;document.querySelectorAll('[data-group]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');selId=null;render();});
@@ -782,6 +826,128 @@ function closeOutputModal(){
   document.getElementById('oh-modal-bg').classList.remove('on');
   document.body.style.overflow='';
 }
+
+// ── Team Workload Modal ───────────────────────────────────────
+var TW_MODAL_OWNER = '';
+var TW_MODAL_FILTER = 'all';
+var TW_STATUS_COLOR = {
+  'Complete':'#2F9E44','Completed':'#2F9E44',
+  'In Progress':'#E67700','In progress':'#E67700',
+  'Past due':'#C92A2A','Overdue':'#C92A2A',
+  'Not Started':'#6b7280','Not started':'#6b7280',
+  'On Hold':'#9333ea'
+};
+
+function openTeamModal(ownerName, ownerColor) {
+  TW_MODAL_OWNER = ownerName;
+  TW_MODAL_FILTER = 'all';
+
+  // Get all action items for this owner
+  var items = ACTIONS.filter(function(a) {
+    return normO(a.owner||'') === ownerName;
+  });
+
+  // Header avatar + name
+  var av = document.getElementById('tw-modal-av');
+  av.style.background = ownerColor + '22';
+  av.style.color = ownerColor;
+  av.textContent = initials(ownerName);
+  document.getElementById('tw-modal-title').textContent = ownerName;
+
+  // Count stats
+  var pastdue = 0, inprog = 0, open = 0, done = 0;
+  items.forEach(function(a) {
+    var s = (a.status||'').toLowerCase();
+    if(s==='complete'||s==='completed') done++;
+    else if(isOD(a)) pastdue++;
+    else if(s==='in progress') inprog++;
+    else open++;
+  });
+
+  document.getElementById('tw-modal-sub').textContent =
+    items.length + ' action item' + (items.length !== 1 ? 's' : '') +
+    (pastdue ? ' · ' + pastdue + ' past due' : '');
+
+  // Summary stat pills
+  var sumEl = document.getElementById('tw-modal-summary');
+  sumEl.innerHTML = '';
+  [
+    {n:pastdue, l:'Past due',    bg:'#fef2f2', c:'#dc2626'},
+    {n:inprog,  l:'In progress', bg:'#fffbeb', c:'#d97706'},
+    {n:open,    l:'Open',        bg:'var(--bg2)', c:'var(--t2)'},
+    {n:done,    l:'Done',        bg:'#f0fdf4', c:'#15803d'},
+  ].forEach(function(s) {
+    var d = document.createElement('div');
+    d.className = 'tw-modal-stat';
+    d.style.background = s.bg;
+    d.innerHTML = '<div class="tw-modal-stat-n" style="color:'+s.c+'">'+s.n+'</div><div class="tw-modal-stat-l">'+s.l+'</div>';
+    sumEl.appendChild(d);
+  });
+
+  // Reset filter buttons
+  document.querySelectorAll('[data-twf]').forEach(function(b) { b.classList.remove('on'); });
+  document.querySelector('[data-twf="all"]').classList.add('on');
+
+  // Render task list
+  renderTeamModalList(items);
+
+  // Show modal
+  document.getElementById('tw-modal-bg').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderTeamModalList(items) {
+  var filtered = items.filter(function(a) {
+    var s = (a.status||'').toLowerCase();
+    if(TW_MODAL_FILTER==='pastdue') return isOD(a);
+    if(TW_MODAL_FILTER==='inprog')  return s==='in progress';
+    if(TW_MODAL_FILTER==='open')    return s!=='completed'&&s!=='complete'&&!isOD(a)&&s!=='in progress';
+    return true;
+  });
+
+  // Sort: past due first, then by due date
+  filtered.sort(function(a, b) {
+    var ao = isOD(a), bo = isOD(b);
+    if(ao&&!bo) return -1; if(!ao&&bo) return 1;
+    return ((a.dueDate||a.due||'')).localeCompare((b.dueDate||b.due||''));
+  });
+
+  var list = document.getElementById('tw-modal-list');
+  if(!filtered.length) {
+    list.innerHTML = '<div class="tw-empty">No items match this filter.</div>';
+    return;
+  }
+
+  list.innerHTML = '';
+  filtered.forEach(function(a) {
+    var od = isOD(a);
+    var s = od ? 'Past due' : (a.status||'Not started');
+    var col = TW_STATUS_COLOR[od?'Past due':a.status]||'#6b7280';
+    var dt = a.dueDate||a.due||'';
+    var dstr = dt ? dt.slice(5).replace('-','/') : '&#8212;';
+    var blocked = a.blocked&&a.blocked.indexOf('Blocked')>=0;
+
+    var row = document.createElement('div');
+    row.className = 'tw-task-row';
+    row.innerHTML =
+      '<span class="tw-task-st" style="background:'+col+'18;color:'+col+'">'+s+'</span>'+
+      '<div class="tw-task-main">'+
+        '<div class="tw-task-name">'+esc(a.action)+'</div>'+
+        '<div class="tw-task-meta">'+
+          (a.output?'<span>'+esc(a.output)+'</span>':'')+
+          (a.track?'<span>'+esc(a.track)+'</span>':'')+
+          (blocked?'<span style="color:#dc2626;font-weight:500">&#128308; blocked</span>':'')+
+        '</div>'+
+      '</div>'+
+      '<div class="tw-task-due" style="color:'+(od?'#C92A2A':'var(--t2)')+'">'+dstr+'</div>';
+    list.appendChild(row);
+  });
+}
+
+function closeTeamModal() {
+  document.getElementById('tw-modal-bg').classList.remove('on');
+  document.body.style.overflow = '';
+}
 </script>
 
 <div class="oh-modal-bg" id="oh-modal-bg">
@@ -800,6 +966,31 @@ function closeOutputModal(){
       <div class="oh-modal-owner" id="oh-modal-owner"></div>
     </div>
     <div class="oh-modal-tasks" id="oh-modal-tasks-body"></div>
+  </div>
+</div>
+
+<div class="tw-modal-bg" id="tw-modal-bg">
+  <div class="tw-modal" id="tw-modal">
+    <div class="tw-modal-hdr">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="tw-modal-av" id="tw-modal-av"></div>
+        <div>
+          <div class="tw-modal-title" id="tw-modal-title">Person name</div>
+          <div class="tw-modal-sub" id="tw-modal-sub">X action items</div>
+        </div>
+      </div>
+      <button class="tw-modal-close" id="tw-modal-close">&times;</button>
+    </div>
+    <div class="tw-modal-summary" id="tw-modal-summary"></div>
+    <div class="tw-modal-tasks" id="tw-modal-tasks-body">
+      <div class="tw-modal-filter" id="tw-modal-filter">
+        <button class="tw-modal-fb on" data-twf="all">All</button>
+        <button class="tw-modal-fb" data-twf="pastdue">Past due</button>
+        <button class="tw-modal-fb" data-twf="inprog">In progress</button>
+        <button class="tw-modal-fb" data-twf="open">Open</button>
+      </div>
+      <div id="tw-modal-list"></div>
+    </div>
   </div>
 </div>
 </body>

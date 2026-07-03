@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Career Pipeline Program — PMO Dashboard · Intuit for Education</title>
+<title>Career Pipeline Program ? PMO Dashboard ? Intuit for Education</title>
 <style>
 :root{--bg:#ffffff;--bg2:#f9fafb;--t1:#111827;--t2:#6b7280;--b1:rgba(0,0,0,0.08);--b2:rgba(0,0,0,0.13);--dbg:#fef2f2;--dt:#dc2626;--db:#fecaca;--wbg:#fffbeb;--wt:#d97706;--wb:#fde68a;--sbg:#f0fdf4;--st:#15803d;--sb:#bbf7d0;--ibg:#eff6ff;--it:#1d4ed8;--ib:#bfdbfe;--r1:8px;--r2:12px;--ff:'Avenir Next','Segoe UI',system-ui,-apple-system,sans-serif;}
 @media(prefers-color-scheme:dark){:root{--bg:#111827;--bg2:#1f2937;--t1:#f9fafb;--t2:#9ca3af;--b1:rgba(255,255,255,0.08);--b2:rgba(255,255,255,0.13);--dbg:#450a0a;--dt:#f87171;--db:#7f1d1d;--wbg:#451a03;--wt:#fbbf24;--wb:#78350f;--sbg:#052e16;--st:#4ade80;--sb:#14532d;--ibg:#1e3a5f;--it:#60a5fa;--ib:#1d4ed8;}}
@@ -175,7 +175,7 @@ var MS_FALLBACK=[
   {id:'po1',tr:'program',t:'Budget finalized',due:'2026-04-15',o:'Karla Moultak',st:'done'},
   {id:'po2',tr:'program',t:'Program Op Mechs established',due:'2026-04-15',o:'Karla Moultak',st:'done'},
   {id:'po3',tr:'program',t:'DACE + R&Rs set',due:'2026-04-23',o:'Karla Moultak',st:'done'},
-  {id:'po4',tr:'program',t:'Stakeholder Journey Maps — First Draft',due:'2026-05-10',o:'Karla Moultak',st:'done',n:'Drafts complete, shared with team'},
+  {id:'po4',tr:'program',t:'Stakeholder Journey Maps ? First Draft',due:'2026-05-10',o:'Karla Moultak',st:'done',n:'Drafts complete, shared with team'},
   {id:'q6',tr:'product',t:'KEY MILESTONE: LIVE on QBEP',due:'2026-07-31',o:'Bella Rozenkrants',st:'event',n:'QBEP post-login live with Career Pipeline certification pathway'},
   {id:'arh6',tr:'product',t:'KEY MILESTONE: Academic Resource Hub LIVE',due:'2026-08-01',o:'Bella Rozenkrants',st:'event',n:'I4E microsite'},
   {id:'epd9',tr:'educatorpd',t:'KEY MILESTONE: QB Educator Badge LIVE',due:'2026-08-01',o:'Emily / Bella',st:'event',n:'Educator badge program live'},
@@ -295,7 +295,7 @@ function drawChart(){
     if(!total)return;
     var bw=W-LPAD-RPAD;
     ctx.fillStyle=tc;ctx.textAlign='right';
-    ctx.fillText(out.name.length>18?out.name.substring(0,17)+'…':out.name,LPAD-5,y+RH/2);
+    ctx.fillText(out.name.length>18?out.name.substring(0,17)+'?':out.name,LPAD-5,y+RH/2);
     ctx.fillStyle=dark?'rgba(255,255,255,0.04)':'rgba(0,0,0,0.04)';ctx.fillRect(LPAD,y,bw,RH);
     var x=LPAD;
     [{c:out.done,col:'#2F9E44'},{c:out.prog,col:'#E67700'},{c:out.atrisk,col:'#C92A2A'},{c:out.future,col:dark?'#374151':'#e5e7eb'}].forEach(function(s){if(!s.c)return;var w=(s.c/total)*bw;ctx.fillStyle=s.col;ctx.fillRect(x,y,w,RH);x+=w;});

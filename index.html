@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Career Pipeline Program ? PMO Dashboard ? Intuit for Education</title>
+<title>Career Pipeline Program — PMO Dashboard · Intuit for Education</title>
 <style>
 :root{--bg:#ffffff;--bg2:#f9fafb;--t1:#111827;--t2:#6b7280;--b1:rgba(0,0,0,0.08);--b2:rgba(0,0,0,0.13);--dbg:#fef2f2;--dt:#dc2626;--db:#fecaca;--wbg:#fffbeb;--wt:#d97706;--wb:#fde68a;--sbg:#f0fdf4;--st:#15803d;--sb:#bbf7d0;--ibg:#eff6ff;--it:#1d4ed8;--ib:#bfdbfe;--r1:8px;--r2:12px;--ff:'Avenir Next','Segoe UI',system-ui,-apple-system,sans-serif;}
 @media(prefers-color-scheme:dark){:root{--bg:#111827;--bg2:#1f2937;--t1:#f9fafb;--t2:#9ca3af;--b1:rgba(255,255,255,0.08);--b2:rgba(255,255,255,0.13);--dbg:#450a0a;--dt:#f87171;--db:#7f1d1d;--wbg:#451a03;--wt:#fbbf24;--wb:#78350f;--sbg:#052e16;--st:#4ade80;--sb:#14532d;--ibg:#1e3a5f;--it:#60a5fa;--ib:#1d4ed8;}}
@@ -28,6 +28,31 @@
 .trow{height:64px;position:relative;border-bottom:.5px solid var(--b1)}.trow-base{position:absolute;left:0;right:0;top:50%;height:1px;transform:translateY(-50%);opacity:.12}.mdot{position:absolute;cursor:pointer;transform:translate(-50%,-50%);border:2px solid;border-radius:50%;transition:transform .12s;z-index:6}.mdot:hover,.mdot.sel{transform:translate(-50%,-50%) scale(1.6);z-index:9}.mdot.ev{border-radius:3px;transform:translate(-50%,-50%) rotate(45deg)}.mdot.ev:hover,.mdot.ev.sel{transform:translate(-50%,-50%) rotate(45deg) scale(1.5)}
 .lgd{padding:7px 14px;border-top:.5px solid var(--b1);display:flex;align-items:center;gap:14px;flex-wrap:wrap}.li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--t2)}.ld{width:9px;height:9px;border-radius:50%;border:2px solid;flex-shrink:0}.lbar{width:1.5px;height:12px;flex-shrink:0}
 .dc{margin:0 14px 14px;border:.5px solid var(--b2);border-radius:var(--r2);background:var(--bg);padding:12px 14px;display:none}.dc.show{display:block}.dch{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}.dct{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--t2);margin-bottom:3px}.dcn{font-size:14px;font-weight:500;color:var(--t1)}.dcx{background:none;border:none;cursor:pointer;font-size:17px;color:var(--t2);line-height:1;padding:0 3px}.dcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.dcf label{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--t2);display:block;margin-bottom:2px}.dcf span{font-size:12px;color:var(--t1)}.dcb{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;margin-bottom:9px}.dcno{margin-top:9px;padding-top:9px;border-top:.5px solid var(--b1);font-size:12px;color:var(--t2);line-height:1.5}
+
+.oh-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:400;align-items:center;justify-content:center;padding:16px}
+.oh-modal-bg.on{display:flex}
+.oh-modal{background:var(--bg);border:.5px solid var(--b2);border-radius:12px;width:100%;max-width:580px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.oh-modal-hdr{padding:14px 16px 10px;border-bottom:.5px solid var(--b1);display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-shrink:0}
+.oh-modal-title{font-size:14px;font-weight:500;color:var(--t1);line-height:1.3}
+.oh-modal-sub{font-size:11px;color:var(--t2);margin-top:2px}
+.oh-modal-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--t2);line-height:1;padding:0 2px;flex-shrink:0}
+.oh-modal-summary{padding:12px 16px;border-bottom:.5px solid var(--b1);flex-shrink:0}
+.oh-modal-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.oh-modal-stat{padding:5px 10px;border-radius:6px;text-align:center;min-width:70px}
+.oh-modal-stat-n{font-size:18px;font-weight:500;line-height:1}
+.oh-modal-stat-l{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--t2);margin-top:1px}
+.oh-modal-bar{height:6px;border-radius:99px;background:var(--b1);overflow:hidden;display:flex;margin-bottom:6px}
+.oh-modal-owner{font-size:11px;color:var(--t2)}
+.oh-modal-tasks{flex:1;overflow-y:auto;padding:8px 16px 12px}
+.oh-modal-tasks-hdr{font-size:10px;font-weight:500;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;margin-top:4px}
+.oh-task-row{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:.5px solid var(--b1)}
+.oh-task-row:last-child{border-bottom:none}
+.oh-task-st{font-size:9px;font-weight:500;padding:2px 6px;border-radius:3px;white-space:nowrap;flex-shrink:0;margin-top:1px}
+.oh-task-main{flex:1;min-width:0}
+.oh-task-name{font-size:11px;color:var(--t1);line-height:1.4}
+.oh-task-meta{font-size:10px;color:var(--t2);margin-top:2px;display:flex;gap:8px;flex-wrap:wrap}
+.oh-task-due{font-size:10px;font-weight:500;white-space:nowrap;flex-shrink:0;min-width:50px;text-align:right}
+.oh-next-due{background:var(--wbg);border:.5px solid var(--wb);border-radius:6px;padding:6px 10px;font-size:11px;color:var(--wt);margin-bottom:6px;display:flex;align-items:center;gap:6px}
 </style>
 </head>
 <body>
@@ -175,7 +200,7 @@ var MS_FALLBACK=[
   {id:'po1',tr:'program',t:'Budget finalized',due:'2026-04-15',o:'Karla Moultak',st:'done'},
   {id:'po2',tr:'program',t:'Program Op Mechs established',due:'2026-04-15',o:'Karla Moultak',st:'done'},
   {id:'po3',tr:'program',t:'DACE + R&Rs set',due:'2026-04-23',o:'Karla Moultak',st:'done'},
-  {id:'po4',tr:'program',t:'Stakeholder Journey Maps ? First Draft',due:'2026-05-10',o:'Karla Moultak',st:'done',n:'Drafts complete, shared with team'},
+  {id:'po4',tr:'program',t:'Stakeholder Journey Maps — First Draft',due:'2026-05-10',o:'Karla Moultak',st:'done',n:'Drafts complete, shared with team'},
   {id:'q6',tr:'product',t:'KEY MILESTONE: LIVE on QBEP',due:'2026-07-31',o:'Bella Rozenkrants',st:'event',n:'QBEP post-login live with Career Pipeline certification pathway'},
   {id:'arh6',tr:'product',t:'KEY MILESTONE: Academic Resource Hub LIVE',due:'2026-08-01',o:'Bella Rozenkrants',st:'event',n:'I4E microsite'},
   {id:'epd9',tr:'educatorpd',t:'KEY MILESTONE: QB Educator Badge LIVE',due:'2026-08-01',o:'Emily / Bella',st:'event',n:'Educator badge program live'},
@@ -295,7 +320,7 @@ function drawChart(){
     if(!total)return;
     var bw=W-LPAD-RPAD;
     ctx.fillStyle=tc;ctx.textAlign='right';
-    ctx.fillText(out.name.length>18?out.name.substring(0,17)+'?':out.name,LPAD-5,y+RH/2);
+    ctx.fillText(out.name.length>18?out.name.substring(0,17)+'…':out.name,LPAD-5,y+RH/2);
     ctx.fillStyle=dark?'rgba(255,255,255,0.04)':'rgba(0,0,0,0.04)';ctx.fillRect(LPAD,y,bw,RH);
     var x=LPAD;
     [{c:out.done,col:'#2F9E44'},{c:out.prog,col:'#E67700'},{c:out.atrisk,col:'#C92A2A'},{c:out.future,col:dark?'#374151':'#e5e7eb'}].forEach(function(s){if(!s.c)return;var w=(s.c/total)*bw;ctx.fillStyle=s.col;ctx.fillRect(x,y,w,RH);x+=w;});
@@ -322,6 +347,14 @@ function renderOutputHealth(){
     if(o.prog>0)tags+='<span class="oh-tag" style="background:#fffbeb;color:#d97706">'+o.prog+' in progress</span>';
     var card=document.createElement('div');card.className='oh-card';
     card.style.borderLeftColor=borderColor;
+    card.style.cursor='pointer';
+    card.style.transition='box-shadow .12s';
+    card.addEventListener('mouseenter',function(){card.style.boxShadow='0 2px 8px rgba(0,0,0,.1)';});
+    card.addEventListener('mouseleave',function(){card.style.boxShadow='';});
+    card.addEventListener('click',function(){
+      if(CP_WBP.length){openOutputModal(o.name);}
+      else{alert('Live data not yet loaded. Click Refresh to load.');}
+    });
     card.innerHTML=
       '<div class="oh-card-top">'+
         '<div class="oh-name">'+o.name+'</div>'+
@@ -666,6 +699,9 @@ function cpHideTip(){CP_TIP.classList.remove('on');}
 
 document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('rfbtn').addEventListener('click',function(){loadData();});
+  document.getElementById('oh-modal-close').addEventListener('click',closeOutputModal);
+  document.getElementById('oh-modal-bg').addEventListener('click',function(e){if(e.target===this)closeOutputModal();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOutputModal();});
   document.getElementById('dc-close').addEventListener('click',clearSel);
   document.getElementById('view-grp').addEventListener('click',function(e){var btn=e.target.closest('[data-view]');if(!btn)return;viewMode=btn.dataset.view;document.querySelectorAll('[data-view]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');selId=null;document.getElementById('detail-card').classList.remove('show');render();});
   document.getElementById('group-grp').addEventListener('click',function(e){var btn=e.target.closest('[data-group]');if(!btn)return;groupBy=btn.dataset.group;document.querySelectorAll('[data-group]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');selId=null;render();});
@@ -680,6 +716,91 @@ document.addEventListener('DOMContentLoaded',function(){
   setTimeout(function(){drawChart();var sc=document.getElementById('tl-sc');if(sc)sc.scrollLeft=Math.max(0,TX-260);},100);
   window.addEventListener('resize',drawChart);
 });
+
+// ── Output Health Modal ───────────────────────────────────────
+var OH_STATUS_COLOR={
+  'Complete':'#2F9E44','Completed':'#2F9E44',
+  'In Progress':'#E67700','In progress':'#E67700',
+  'Past due':'#C92A2A','Overdue':'#C92A2A',
+  'Not Started':'#6b7280','Not started':'#6b7280',
+  'On Hold':'#9333ea'
+};
+
+function openOutputModal(outputName){
+  var tasks=CP_WBP.filter(function(t){return(t.output||'')==outputName;});
+  var total=tasks.length;
+  if(!total)return;
+  var done=0,prog=0,atrisk=0,future=0;
+  tasks.forEach(function(t){
+    var s=(t.status||'').toLowerCase();
+    var od=t.endDate&&new Date(t.endDate+'T00:00:00')<TODAY&&s!=='complete'&&s!=='completed';
+    if(s==='complete'||s==='completed')done++;
+    else if(od)atrisk++;
+    else if(s==='in progress')prog++;
+    else future++;
+  });
+  var pct=Math.round((done/total)*100);
+  var owner=tasks[0]&&tasks[0].driver?tasks[0].driver:'';
+  document.getElementById('oh-modal-title').textContent=outputName;
+  document.getElementById('oh-modal-sub').textContent=(owner?owner+' · ':'')+total+' task'+(total>1?'s':'')+' · '+pct+'% complete';
+  var statsEl=document.getElementById('oh-modal-stats');
+  statsEl.innerHTML='';
+  [{n:done,l:'Done',bg:'#f0fdf4',c:'#15803d'},{n:prog,l:'In progress',bg:'#fffbeb',c:'#d97706'},{n:atrisk,l:'Past due',bg:'#fef2f2',c:'#dc2626'},{n:future,l:'Not started',bg:'var(--bg2)',c:'var(--t2)'}].forEach(function(s){
+    var d=document.createElement('div');d.className='oh-modal-stat';d.style.background=s.bg;
+    d.innerHTML='<div class="oh-modal-stat-n" style="color:'+s.c+'">'+s.n+'</div><div class="oh-modal-stat-l">'+s.l+'</div>';
+    statsEl.appendChild(d);
+  });
+  var barEl=document.getElementById('oh-modal-bar');
+  barEl.innerHTML=(done?'<div class="oh-seg" style="width:'+(done/total*100).toFixed(1)+'%;background:#2F9E44"></div>':'')+(prog?'<div class="oh-seg" style="width:'+(prog/total*100).toFixed(1)+'%;background:#E67700"></div>':'')+(atrisk?'<div class="oh-seg" style="width:'+(atrisk/total*100).toFixed(1)+'%;background:#C92A2A"></div>':'')+(future?'<div class="oh-seg" style="width:'+(future/total*100).toFixed(1)+'%;background:var(--b1)"></div>':'');
+  var ndWrap=document.getElementById('oh-next-due-wrap');
+  var upcoming=tasks.filter(function(t){var s=(t.status||'').toLowerCase();return s!=='complete'&&s!=='completed'&&t.endDate&&new Date(t.endDate+'T00:00:00')>=TODAY;}).sort(function(a,b){return new Date(a.endDate)-new Date(b.endDate);});
+  if(upcoming.length){var nd=upcoming[0];var ndDate=nd.endDate?nd.endDate.slice(5).replace('-','/'):'';ndWrap.innerHTML='<div class="oh-next-due">&#128197; <strong>Next due '+ndDate+':</strong> '+nd.task+(nd.driver?' &middot; '+nd.driver:'')+'</div>';}else{ndWrap.innerHTML='';}
+  document.getElementById('oh-modal-owner').textContent=owner?'Output lead: '+owner:'';
+  var sorted=[].concat(tasks).sort(function(a,b){
+    var aOD=a.endDate&&new Date(a.endDate+'T00:00:00')<TODAY&&(a.status||'').toLowerCase()!=='complete'&&(a.status||'').toLowerCase()!=='completed';
+    var bOD=b.endDate&&new Date(b.endDate+'T00:00:00')<TODAY&&(b.status||'').toLowerCase()!=='complete'&&(b.status||'').toLowerCase()!=='completed';
+    if(aOD&&!bOD)return-1;if(!aOD&&bOD)return 1;
+    return new Date(a.endDate||'9999')-new Date(b.endDate||'9999');
+  });
+  var body=document.getElementById('oh-modal-tasks-body');
+  body.innerHTML='<div class="oh-modal-tasks-hdr">All tasks ('+total+')</div>';
+  sorted.forEach(function(t){
+    var s=(t.status||''),sLow=s.toLowerCase();
+    var od=t.endDate&&new Date(t.endDate+'T00:00:00')<TODAY&&sLow!=='complete'&&sLow!=='completed';
+    var label=od?'Past due':s||'Not started';
+    var col=OH_STATUS_COLOR[od?'Past due':s]||'#6b7280';
+    var dstr=t.endDate?t.endDate.slice(5).replace('-','/'):'&#8212;';
+    var row=document.createElement('div');row.className='oh-task-row';
+    row.innerHTML='<span class="oh-task-st" style="background:'+col+'18;color:'+col+'">'+label+'</span><div class="oh-task-main"><div class="oh-task-name">'+t.task+'</div>'+(t.driver?'<div class="oh-task-meta"><span>&#128100; '+t.driver+'</span></div>':'')+'</div><div class="oh-task-due" style="color:'+(od?'#C92A2A':'var(--t2)')+'">'+dstr+'</div>';
+    body.appendChild(row);
+  });
+  document.getElementById('oh-modal-bg').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function closeOutputModal(){
+  document.getElementById('oh-modal-bg').classList.remove('on');
+  document.body.style.overflow='';
+}
 </script>
+
+<div class="oh-modal-bg" id="oh-modal-bg">
+  <div class="oh-modal" id="oh-modal">
+    <div class="oh-modal-hdr">
+      <div>
+        <div class="oh-modal-title" id="oh-modal-title">Output name</div>
+        <div class="oh-modal-sub" id="oh-modal-sub">Owner &middot; X tasks</div>
+      </div>
+      <button class="oh-modal-close" id="oh-modal-close">&times;</button>
+    </div>
+    <div class="oh-modal-summary">
+      <div class="oh-modal-stats" id="oh-modal-stats"></div>
+      <div class="oh-modal-bar" id="oh-modal-bar"></div>
+      <div id="oh-next-due-wrap"></div>
+      <div class="oh-modal-owner" id="oh-modal-owner"></div>
+    </div>
+    <div class="oh-modal-tasks" id="oh-modal-tasks-body"></div>
+  </div>
+</div>
 </body>
 </html>

@@ -494,7 +494,7 @@ function renderCriticalPath(){
   if(!lblsEl||!mthsEl||!rowsEl)return;
   while(lblsEl.children.length>1)lblsEl.removeChild(lblsEl.lastChild);
   mthsEl.innerHTML='';rowsEl.innerHTML='';
-  var cpTasks=CP_WBP.filter(function(t){return t.criticalPath===true;});
+  var cpTasks=CP_WBP.filter(function(t){return t.criticalPath===true||String(t.criticalPath).toUpperCase()==='YES';});
   if(!cpTasks.length){
     badge.textContent='Set col Q = TRUE to populate';
     badge.style.background='#f3f4f6';badge.style.color='#6b7280';

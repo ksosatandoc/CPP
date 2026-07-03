@@ -467,9 +467,9 @@ function setTrack(id){
 // ── CRITICAL PATH GANTT ──────────────────────────────────────
 var CP_OPEN=true;
 var CP_TIP=null;
-var CP_S=new Date(2026,3,1),CP_E=new Date(2026,9,15),CP_BTS=new Date(2026,7,1);
+var CP_S=new Date(2026,5,1),CP_E=new Date(2026,9,15),CP_BTS=new Date(2026,7,1);
 var CP_SPAN=CP_E-CP_S,CP_PX=820;
-var CP_MONTHS=[{l:'Apr',s:new Date(2026,3,1)},{l:'May',s:new Date(2026,4,1)},{l:'Jun',s:new Date(2026,5,1)},{l:'Jul',s:new Date(2026,6,1)},{l:'Aug',s:new Date(2026,7,1)},{l:'Sep',s:new Date(2026,8,1)},{l:'Oct',s:new Date(2026,9,1)}];
+var CP_MONTHS=[{l:'Jun',s:new Date(2026,5,1)},{l:'Jul',s:new Date(2026,6,1)},{l:'Aug',s:new Date(2026,7,1)},{l:'Sep',s:new Date(2026,8,1)},{l:'Oct',s:new Date(2026,9,1)}];
 var CP_SC={done:{bg:'#2F9E44',text:'#fff',label:'Complete'},prog:{bg:'#E67700',text:'#fff',label:'In progress'},overdue:{bg:'#C92A2A',text:'#fff',label:'Overdue'},future:{bg:'transparent',text:'#1971C2',border:'1.5px solid #1971C2',label:'Not started'},milestone:{bg:'#236CFF',text:'#fff',label:'Milestone'}};
 var CP_TRACK_META={program:{label:'Program',color:'#534AB7'},curriculum:{label:'Curriculum',color:'#0F6E56'},product:{label:'Product',color:'#185FA5'},highered:{label:'Higher Ed',color:'#3B6D11'},propartner:{label:'ProPartner',color:'#D85A30'},educatorpd:{label:'Educator PD',color:'#993556'},gtm:{label:'GTM & Events',color:'#BA7517'},efficacy:{label:'Efficacy',color:'#5F5E5A'}};
 var CP_TRACK_ORDER=['program','curriculum','product','highered','propartner','educatorpd','gtm','efficacy'];
